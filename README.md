@@ -1,1 +1,1 @@
-this prints effective username of current owner
+this prints all group the current user is part of
