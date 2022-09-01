@@ -1,1 +1,1 @@
-this is a shell bash script
+this is a shell bash script switching user to betty
