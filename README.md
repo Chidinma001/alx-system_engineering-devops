@@ -1,1 +1,1 @@
-this prints all group the current user is part of
+this changes ownership of file
