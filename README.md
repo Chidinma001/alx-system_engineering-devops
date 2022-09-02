@@ -1,1 +1,1 @@
-this executes permission to all subdirectories of the current directory for the owner, the group owner and all other users and  Regular files should not be changed
+creation of a directory called my_dir with permissions 751 in working directory
