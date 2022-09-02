@@ -1,1 +1,1 @@
-prints the type of the file named iamafile. The file iamafile will be in the /tmp directory when we will run your script.
+The symbolic link should be created in the current working directory.
