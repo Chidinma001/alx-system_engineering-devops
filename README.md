@@ -1,1 +1,1 @@
-Create a magic file school.mgc that can be used with the command file to detect School data files 
+script that prints “Hello, World”, followed by a new line to the standard output
