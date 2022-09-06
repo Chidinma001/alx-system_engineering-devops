@@ -1,1 +1,1 @@
-Empty casks make the most noise
+a script that displays all users and their home directories, sorted by users.
