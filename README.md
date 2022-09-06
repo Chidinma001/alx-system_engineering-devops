@@ -1,1 +1,1 @@
-create a script that removes all letters c and C from input.
+Empty casks make the most noise
