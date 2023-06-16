@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Install load balancer
+
+# Install HAProxy 1.8 and configure it
+apt-get update
+apt-get install -y software-properties-common
+add-apt-repository -y ppa:vbernat/haproxy-1.8
+apt-get update
+apt-get install -y haproxy=1.8.*
+
+# Configure HAPRoxy
+echo "ENABLED=1" >> /etc/default/haproxy
+mv /etc/haproxy/haproxy.cfg{,.original}
+cat << EOF > /etc/haproxy/haproxy.cfg
+global
+    log 127.0.0.1 local0 notice
+    maxconn 2000
+    user haproxy
+    group haproxy
+
+defaults
+    log    global
+    mode   http
+    option httplog
+    option dontlognull
+    retries 3
+    option redispatch
+    timeout connect 5000
+    timeout client  10000
+    timeout server  10000
+
+listen hbnb
+    bind 0.0.0.0:80
+    mode http
+    stats enable
+    stats uri /haproxy?stats
+    balance roundrobin
+    option httpclose
+    option forwardfor
+    server 119779-web-01 52.86.208.77:80 check
+    server 119779-web-02 34.237.91.3:80 check
+EOF
+
+# Start HAProxy
+service haproxy start 
