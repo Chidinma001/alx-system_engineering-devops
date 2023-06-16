@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Double the number of webservers
+
+set -e
+
+WEBSITE="ALX SE"
+NGINX_CONF_FILE="/etc/nginx/sites-available/default"
+
+function install_nginx() {
+    apt-get update
+    apt-get install -y nginx
+    service nginx start
+}
+
+function create_index_html() {
+    echo "${WEBSITE_NAME}" > /var/www/html/index.html
+}
+
+function create_404_html() {
+    echo "Page NOT found" > /var/www/html/404.html
+}
+
+function configure_nginx() {
+    printf %s "server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	add_header X-Served-By '$HOSTNAME';
+	root /var/www/html;
+	index index.html index.htm;
+	location /redirect_me {
+	    return 301 https://google.com/;
+	}
+	error_page 404 /404.html;
+	location /404 {
+	    root /var/www/html;
+	    internal;
+	}
+    }" > ${NGINX_CONF_FILE}
+    service nginx restart
+}
+
+install_nginx
+create_index_html
+create_404_html
+configure_nginx
